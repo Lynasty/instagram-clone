@@ -1,16 +1,33 @@
 import { getProviders, signIn as SignIntoProvider } from "next-auth/react"
+import Header from "../../components/Header"
 
 function signIn({ providers }) {
     return (
         <div>
             <>
-                {Object.values(providers).map((provider) => (
-                    <div key={provider.name}>
-                        <button onClick={() => SignIntoProvider(provider.id)}>
-                            Sign in with {provider.name}
-                        </button>
+                <Header />
+                <div className="flex flex-col items-center justify-center mt-20 py-2 px-14 text-center">
+                    <img
+                        className="w-80"
+                        src="https://links.papareact.com/ocw"
+                        alt=""
+                    />
+
+                    <div className="mt-20">
+                        {Object.values(providers).map((provider) => (
+                            <div key={provider.name}>
+                                <button
+                                    className="p-3 bg-blue-500 rounded-lg text-white"
+                                    onClick={() =>
+                                        SignIntoProvider(provider.id, {callbackUrl: '/'})
+                                    }
+                                >
+                                    Sign in with {provider.name}
+                                </button>
+                            </div>
+                        ))}
                     </div>
-                ))}
+                </div>
             </>
         </div>
     )
