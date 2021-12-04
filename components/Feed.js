@@ -12,7 +12,9 @@ function Feed() {
             {/* Section */}
             <section className="col-span-2">
                 {/** Stories */}
-                <Stories />
+                {session && (
+                    <Stories />
+                )}
                 <Posts />
                 {/** Posts */}
             </section>
