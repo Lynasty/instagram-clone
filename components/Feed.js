@@ -17,12 +17,11 @@ function Feed() {
             {/** Section */}
             <section className="hidden xl:inline-grid md:col-span-1">
                 <div className="fixed top-20">
-                {/** Mini Profile */}
-                <MiniProfile />
-                    
+                    {/** Mini Profile */}
+                    <MiniProfile />
+                    {/** Suggestions */}
+                    <Suggestions />
                 </div>
-                {/** Suggestions */}
-                <Suggestions />
             </section>
         </main>
     )
