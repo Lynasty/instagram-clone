@@ -9,4 +9,4 @@ This project is for learning purpose using React.js with
 
 ## Preview
 
-Preview the example live on [upcoming...]
+Preview the example live on https://instagram-clone-rho-inky.vercel.app/
