@@ -1,6 +1,6 @@
 # Instagram Clone using Next.JS
 
-This project is for learning purpose using React.js with 
+This project is for learning purpose using React.js with
 - Next.js
 - Tailwind CSS
 - Firebase
