@@ -9,7 +9,6 @@ import {
     serverTimestamp,
     setDoc,
 } from "@firebase/firestore";
-import { async } from "@firebase/util";
 import {
     BookmarkIcon,
     ChatIcon,
@@ -20,7 +19,6 @@ import {
 } from "@heroicons/react/outline";
 import { HeartIcon as HeartIconFilled } from "@heroicons/react/solid";
 import { useSession } from "next-auth/react";
-import { comment } from "postcss";
 import { useEffect, useState } from "react";
 import { db } from "../firebase";
 import Moment from "react-moment";
@@ -97,7 +95,7 @@ function Post({ id, username, userImg, img, caption }) {
                 <DotsHorizontalIcon className="h-5" />
             </div>
             {/** Img */}
-            <img src={img} alt="" className="object-cover w-full" />
+            <img src={img} alt="" className="object-cover w-full max-h-[800px]" />
             {/** Buttons */}
             {session && (
                 <div className="flex justify-between px-4 pt-4">

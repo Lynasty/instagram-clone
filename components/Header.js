@@ -20,18 +20,18 @@ function Header() {
 
     return (
         <div className="shadow-sm border-b bg-white sticky top-0 z-50">
-            <div className="flex justify-between max-w-6xl mx-5 lg:mx-auto">
+            <div className="flex justify-between max-w-6xl mx-5 lg:mx-auto px-4 xl:px-0">
                 {/* Left */}
                 <div onClick={() => router.push('/')} className="relative hidden lg:inline-grid w-24 cursor-pointer">
                     <Image
-                        src="https://links.papareact.com/ocw"
+                        src="/static/images/insta.png"
                         layout="fill"
                         objectFit="contain"
                     />
                 </div>
                 <div onClick={() => router.push('/')} className="relative lg:hidden w-10 flex-shrink-0 cursor-pointer">
                     <Image
-                        src="https://links.papareact.com/jjm"
+                        src="/static/images/insta-logo-mobile.png"
                         layout="fill"
                         objectFit="contain"
                     />
