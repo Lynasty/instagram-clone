@@ -18,6 +18,7 @@ import { ref, getDownloadURL, uploadString } from "@firebase/storage";
 function Modal() {
     const { data: session } = useSession();
     const [open, setOpen] = useRecoilState(modalState);
+    const [errorMsg, setErrorMsg] = useState('')
     const filePickerRef = useRef(null);
     const [selectedFile, setSelectedFile] = useState(null);
     const captionRef = useRef(null);
@@ -29,34 +30,39 @@ function Modal() {
         reader.onload = (readerEvent) => {
             setSelectedFile(readerEvent.target.result);
         };
+        setErrorMsg('')
     };
     const [loading, setLoading] = useState(false);
     const uploadPost = async () => {
-        if (loading) return;
-        setLoading(true);
+        if (selectedFile && captionRef.current.value !== '') {
+            if (loading) return;
+            setLoading(true);
+            setErrorMsg('')
 
-        const docRef = await addDoc(collection(db, "posts"), {
-            username: session.user.username,
-            caption: captionRef.current.value,
-            profileImg: session.user.image,
-            timestamp: serverTimestamp(),
-        });
+            const docRef = await addDoc(collection(db, "posts"), {
+                username: session.user.username,
+                caption: captionRef.current.value,
+                profileImg: session.user.image,
+                timestamp: serverTimestamp(),
+            });
 
-        const imageRef = ref(storage, `posts/${docRef.id}/image`);
-        await uploadString(imageRef, selectedFile, "data_url").then(
-            async (snapshot) => {
-                const downloadURL = await getDownloadURL(imageRef);
-                await updateDoc(
-                    doc(db, "posts", docRef.id), {
+            const imageRef = ref(storage, `posts/${docRef.id}/image`);
+            await uploadString(imageRef, selectedFile, "data_url").then(
+                async (snapshot) => {
+                    const downloadURL = await getDownloadURL(imageRef);
+                    await updateDoc(doc(db, "posts", docRef.id), {
                         image: downloadURL,
-                    }
-                )
-            }
-        );
+                    });
+                }
+            );
 
-        setOpen(false);
-        setLoading(false);
-        setSelectedFile(null);
+            setOpen(false);
+            setLoading(false);
+            setSelectedFile(null);
+        }
+        else {
+            setErrorMsg('You need a photo & caption')
+        }
     };
 
     return (
@@ -154,6 +160,7 @@ function Modal() {
                                             ? "Uploading..."
                                             : "Upload Post"}
                                     </button>
+                                    <p id="errorMsg" className="text-sm text-red-500 text-center mt-2">{ errorMsg }</p>
                                 </div>
                             </div>
                         </div>
