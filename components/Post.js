@@ -19,7 +19,7 @@ import {
 } from "@heroicons/react/outline";
 import { HeartIcon as HeartIconFilled } from "@heroicons/react/solid";
 import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { db } from "../firebase";
 import Moment from "react-moment";
 
@@ -69,6 +69,8 @@ function Post({ id, username, userImg, img, caption }) {
         [db, id]
     );
 
+    const commentInput = useRef(null)
+
     const sendComment = async (e) => {
         e.preventDefault();
         const commentToSend = comment;
@@ -106,7 +108,7 @@ function Post({ id, username, userImg, img, caption }) {
                         ) : (
                             <HeartIcon onClick={likePost} className="btn" />
                         )}
-                        <ChatIcon className="btn" />
+                        <ChatIcon className="btn" onClick={() => commentInput.current.focus()}/>
                         <PaperAirplaneIcon className="btn rotate-45 pb-1" />
                     </div>
 
@@ -155,6 +157,7 @@ function Post({ id, username, userImg, img, caption }) {
                     <EmojiHappyIcon className="h-7" />
                     <input
                         type="text"
+                        ref={commentInput}
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
                         placeholder="Add a comment..."
