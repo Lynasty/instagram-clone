@@ -9,7 +9,7 @@ function signIn({ providers }) {
                 <div className="flex flex-col items-center justify-center mt-20 py-2 px-14 text-center">
                     <img
                         className="w-80"
-                        src="https://links.papareact.com/ocw"
+                        src="/static/images/insta.png"
                         alt=""
                     />
 
